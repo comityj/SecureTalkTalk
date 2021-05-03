@@ -4,15 +4,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class GoogleActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth ;
     Button btnlogout, btnrevoke;
+    TextView tvname, tvemail;
+    CircleImageView imgprofile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +29,11 @@ public class GoogleActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        btnlogout = findViewById(R.id.logout);
-        btnrevoke = findViewById(R.id.revoke);
+        btnlogout = (Button) findViewById(R.id.logout);
+        btnrevoke = (Button) findViewById(R.id.revoke);
+        tvname = (TextView) findViewById(R.id.profile_name);
+        tvemail = (TextView) findViewById(R.id.profile_email);
+        imgprofile = (CircleImageView) findViewById(R.id.profile_img);
 
         btnlogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +48,12 @@ public class GoogleActivity extends AppCompatActivity {
                 revokeAccess();
             }
         });
+
+
+
+        //Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+
+        //tvname = task.getResult().getUser().getDisplayName();
 
     }
 
