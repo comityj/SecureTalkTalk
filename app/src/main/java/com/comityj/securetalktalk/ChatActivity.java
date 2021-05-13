@@ -1,38 +1,71 @@
+/*
 package com.comityj.securetalktalk;
 
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 
+import androidx.appcompat.app.AppCompatActivity;
 
-public class ChatActivity extends Fragment {
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-    public ChatActivity() {
+public class ChatActivity extends AppCompatActivity {
 
-    }
-
-    public static ChatActivity newInstance(String param1, String param2) {
-        ChatActivity fragment = new ChatActivity();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
+    ListView listmsg;
+    EditText editmsg;
+    Button send;
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.chat);
 
-    }
+        listmsg = (ListView) findViewById(R.id.msglist);
+        editmsg = (EditText) findViewById(R.id.msget);
+        send = (Button) findViewById(R.id.sendbtn);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.chat, container, false);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1);
+        listmsg.setAdapter(adapter);
+
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ChatActivity chatActivity = new ChatActivity(username, editmsg.getText().toString());
+                databaseReference.child("message").push().setValue(chatActivity);
+                editmsg.setText("");
+            }
+        });
+
+        databaseReference.child("message").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                ChatActivity chatActivity = dataSnapshot.getValue(ChatActivity.class);
+                adapter.add(chatActivity.getUsername() + ": " + chatActivity.getMsg());
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) { }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
+
     }
 
 }
+*/

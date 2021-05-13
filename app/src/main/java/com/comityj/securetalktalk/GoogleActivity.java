@@ -19,7 +19,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class GoogleActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth ;
+    private FirebaseAuth mAuth;
     Button btnlogout, btnrevoke, btmchat;
     TextView tvname, tvemail;
     //CircleImageView imgprofile;
