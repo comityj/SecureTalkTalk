@@ -53,4 +53,11 @@
         android:layout_toLeftOf="@+id/login_btn"
         android:layout_alignTop="@id/login_btn"/>
 
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/signInButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/signup_btn"/>
+
 </RelativeLayout>
