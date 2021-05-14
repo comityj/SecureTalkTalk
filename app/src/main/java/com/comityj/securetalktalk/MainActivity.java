@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //t1 = findViewById(R.id.test1);
-/*        t2 = findViewById(R.id.test2_ti);
-        t3 = findViewById(R.id.test2_tiet);*/
+        t2 = findViewById(R.id.test2_ti);
+        t3 = findViewById(R.id.test2_tiet);
 
         gologinbtn = (Button) findViewById(R.id.gologinbtn);
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-/*    public void Test(View view){
+    public void Test(View view){
 
         //텍스트 얻어오기
         //String data1 = t1.getText().toString();
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         //rootRef.setValue(data1);
         rootRef.setValue(data2);
 
-*//*
+/*
         rootRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -73,9 +73,9 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-*//*
+*/
 
 
-    }*/
+    }
 
 }
