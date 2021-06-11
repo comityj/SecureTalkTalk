@@ -32,8 +32,9 @@ public class GoogleActivity extends AppCompatActivity {
         setContentView(R.layout.google);
 
         final Intent intent_L = new Intent(getApplicationContext(), LoginActivity.class);
-        final Intent intent_C = new Intent(getApplicationContext(), ChatActivity.class);
+        //final Intent intent_C = new Intent(getApplicationContext(), ChatMenu.class);
         mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
 
         btmchat = (Button) findViewById(R.id.chatbtn);
         btnlogout = (Button) findViewById(R.id.logout);
@@ -42,8 +43,6 @@ public class GoogleActivity extends AppCompatActivity {
         tvemail = (TextView) findViewById(R.id.profile_email);
         //imgprofile = (CircleImageView) findViewById(R.id.profile_img);
         imgprofile = (ImageView) findViewById(R.id.profile_img);
-
-        FirebaseUser user = mAuth.getCurrentUser();
 
 //        signup = (SignupActivity)getApplicationContext();
 //        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
@@ -54,7 +53,11 @@ public class GoogleActivity extends AppCompatActivity {
 
         btmchat.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { startActivity(intent_C); }
+            public void onClick(View v) {
+                //startActivity(intent_C);
+                Intent intent_c = new Intent(getApplicationContext(), ChatMenu.class);
+                startActivity(intent_c);
+            }
         });
 
         btnlogout.setOnClickListener(new View.OnClickListener() {
