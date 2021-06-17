@@ -12,21 +12,21 @@
         android:text="채팅"
         />
 
-<!--    <de.hdodenhof.circleimageview.CircleImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_img"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_above="@+id/profile_email"
         android:layout_centerHorizontal="true"
-        />-->
+        />
 
-    <ImageView
-        android:id="@+id/profile_img"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_above="@+id/profile_email"
-        android:layout_centerHorizontal="true"
-        tools:srcCompat="@tools:sample/avatars" />
+    <!--    <ImageView
+            android:id="@+id/profile_img"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_above="@+id/profile_email"
+            android:layout_centerHorizontal="true"
+            tools:srcCompat="@tools:sample/avatars" />-->
 
     <TextView
         android:id="@+id/profile_email"

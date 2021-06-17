@@ -2,31 +2,46 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ListView
         android:id="@+id/msglist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp" >
-
-    </ListView>
-
-    <Button
-        android:id="@+id/sendbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text=">"
+        tools:layout_editor_absoluteY="1dp"
         />
 
-    <EditText
-        android:id="@+id/msget"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/sendbtn"
-        android:layout_toLeftOf="@+id/sendbtn"
-        />
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <Button
+            android:id="@+id/aesbtn"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/sendbtn"
+            android:text="AES"
+            />
+
+        <Button
+            android:id="@+id/sendbtn"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text=">"
+            />
+
+        <EditText
+            android:id="@+id/msget"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignBaseline="@+id/sendbtn"
+            android:layout_toLeftOf="@+id/aesbtn"
+            android:background="@drawable/chat_edittext"
+            />
+    </RelativeLayout>
 </RelativeLayout>

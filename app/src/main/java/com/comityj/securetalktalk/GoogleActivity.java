@@ -14,6 +14,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -22,8 +23,8 @@ public class GoogleActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     Button btnlogout, btnrevoke, btmchat;
     TextView tvname, tvemail;
-    //CircleImageView imgprofile;
-    ImageView imgprofile;
+    CircleImageView imgprofile;
+    //ImageView imgprofile;
     private SignupActivity signup;
 
     @Override
@@ -41,15 +42,17 @@ public class GoogleActivity extends AppCompatActivity {
         btnrevoke = (Button) findViewById(R.id.revoke);
         tvname = (TextView) findViewById(R.id.profile_name);
         tvemail = (TextView) findViewById(R.id.profile_email);
-        //imgprofile = (CircleImageView) findViewById(R.id.profile_img);
-        imgprofile = (ImageView) findViewById(R.id.profile_img);
+        imgprofile = (CircleImageView) findViewById(R.id.profile_img);
+        //imgprofile = (ImageView) findViewById(R.id.profile_img);
+        //String imgprofileUrl = user.getPhotoUrl().toString();
 
 //        signup = (SignupActivity)getApplicationContext();
 //        Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 //        tvname = task.getResult().getUser().getDisplayName();
 
         tvname.setText(user.getDisplayName());
-        imgprofile.setImageURI(user.getPhotoUrl());
+        //imgprofile.setImageURI(user.getPhotoUrl());
+        Picasso.get().load(user.getPhotoUrl().toString()).into(imgprofile);
 
         btmchat.setOnClickListener(new View.OnClickListener() {
             @Override
