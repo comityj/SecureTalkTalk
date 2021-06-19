@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -87,7 +88,7 @@ public class ChatActivity extends AppCompatActivity {
         chatname = intent.getStringExtra("chatName");
         username = user.getDisplayName();
 
-        registerForContextMenu(listmsg);
+        //registerForContextMenu(listmsg);
 
         //aestxt = editmsg.getText().toString();
 
@@ -143,8 +144,85 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+        listmsg.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                PopupMenu popup = new PopupMenu(ChatActivity.this, view);
+                getMenuInflater().inflate(R.menu.chat_popup, popup.getMenu());
+                //Toast.makeText(ChatActivity.this,"삭제 되었습니다.", Toast.LENGTH_SHORT).show();
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.encryt:
+                                Toast.makeText(ChatActivity.this,"암호화 되었습니다.", Toast.LENGTH_SHORT).show();
+                                break;
+
+                            case R.id.decryt:
+                                Toast.makeText(ChatActivity.this,"복호화 되었습니다.", Toast.LENGTH_SHORT).show();
+                                break;
+
+                            case R.id.copy:
+                                Toast.makeText(ChatActivity.this,"복사 되었습니다.", Toast.LENGTH_SHORT).show();
+                                break;
+
+                            case R.id.delete:
+                                Toast.makeText(ChatActivity.this,"삭제 되었습니다.", Toast.LENGTH_SHORT).show();
+                                databaseReference.child("message").child(chatname).child(chatlist.get(position)).removeValue();
+                                break;
+
+                        }
+                        return false;
+                    }
+                });
+                popup.show();
+                return true;
+            }
+        });
+
+
+/*       listmsg.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position) { //public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id)
+                PopupMenu popup = new PopupMenu(ChatActivity.this, view);
+                getMenuInflater().inflate(R.menu.chat_popup, popup.getMenu());
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        Toast.makeText(ChatActivity.this, "삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                        databaseReference.child("message").child(chatname).child(chatlist.get(position)).removeValue();
+                        return true;
+
+*//*                        switch (item.getItemId()) {
+                            case R.id.encryt:
+                                Toast.makeText(ChatActivity.this,"암호화 되었습니다.", Toast.LENGTH_SHORT).show();
+                                return true;;
+
+                            case R.id.decryt:
+                                Toast.makeText(ChatActivity.this,"복호화 되었습니다.", Toast.LENGTH_SHORT).show();
+                                return true;;
+
+                            case R.id.copy:
+                                Toast.makeText(ChatActivity.this,"복사 되었습니다.", Toast.LENGTH_SHORT).show();
+                                return true;;
+
+                            case R.id.delete:
+                                Toast.makeText(ChatActivity.this,"삭제 되었습니다.", Toast.LENGTH_SHORT).show();
+                                return true;
+
+                        }
+                        return false;*//*
+                    }
+                });
+                popup.show();
+                return false;
+            }
+        });*/
+
     }
 
+/*
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -182,12 +260,14 @@ public class ChatActivity extends AppCompatActivity {
                     //list.remove(position);
                     //databaseReference.child("message").child(chatname).child(uidList.get(listmsg.getSelectedItemPosition()).);
 
-                    Toast.makeText(ChatActivity.this,"삭제 되었습니다.", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ChatActivity.this,"삭제 되었습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChatActivity.this, "", Toast.LENGTH_SHORT).show();
+                    listmsg.remove
 
             }
             return true;
         }
-    };
+    };*/
 
 
 
