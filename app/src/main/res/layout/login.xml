@@ -13,7 +13,7 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <com.google.android.material.textfield.TextInputLayout
+<!--    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/login_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,21 +43,23 @@
         android:layout_height="wrap_content"
         android:text="로그인"
         android:layout_below="@+id/login_pw"
-        android:layout_alignParentRight="true"/>
+        android:layout_centerHorizontal="true"
+        />-->
+        <!--android:layout_alignParentRight="true"-->
 
-    <Button
+<!--    <Button
         android:id="@+id/signup_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="회원가입"
         android:layout_toLeftOf="@+id/login_btn"
-        android:layout_alignTop="@id/login_btn"/>
+        android:layout_alignTop="@id/login_btn"/>-->
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/signInButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/signup_btn"/>
+        android:layout_centerVertical="true"/>
 
 </RelativeLayout>

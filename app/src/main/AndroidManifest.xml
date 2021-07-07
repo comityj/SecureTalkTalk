@@ -19,6 +19,8 @@
         <activity android:name=".LoginActivity"></activity>
         <activity android:name=".SignupActivity"></activity>
         <activity android:name=".GoogleActivity"></activity>
+        <activity android:name=".ChatMenu"
+            android:windowSoftInputMode="stateHidden"></activity>       //키보드 안나오게
         <activity android:name=".ChatActivity"></activity>
     </application>
 

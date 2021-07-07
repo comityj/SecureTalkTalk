@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
@@ -19,20 +20,32 @@ import com.google.firebase.database.FirebaseDatabase;
 public class MainActivity extends AppCompatActivity {
 
     //EditText t1;
-    TextInputLayout t2;
+/*    TextInputLayout t2;
     EditText t3;
     TextView tv;
-    Button gologinbtn;
+    Button gologinbtn;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Handler hand = new Handler();
+
+        hand.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        }, 3000);
+
         //t1 = findViewById(R.id.test1);
 /*        t2 = findViewById(R.id.test2_ti);
         t3 = findViewById(R.id.test2_tiet);*/
 
-        gologinbtn = (Button) findViewById(R.id.gologinbtn);
+/*        gologinbtn = (Button) findViewById(R.id.gologinbtn);
 
         gologinbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
     }
 

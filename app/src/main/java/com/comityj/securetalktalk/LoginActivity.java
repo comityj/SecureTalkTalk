@@ -43,8 +43,8 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        sbtn = (Button) findViewById(R.id.signup_btn);
-        lbtn = (Button) findViewById(R.id.login_btn);
+        //sbtn = (Button) findViewById(R.id.signup_btn);
+        //lbtn = (Button) findViewById(R.id.login_btn);
         signInButton = (SignInButton) findViewById(R.id.signInButton);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -54,20 +54,20 @@ public class LoginActivity extends AppCompatActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        sbtn.setOnClickListener(new View.OnClickListener() {
+/*        sbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
-        lbtn.setOnClickListener(new View.OnClickListener() {
+/*        lbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(LoginActivity.this, ("로그인 실패"), Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
