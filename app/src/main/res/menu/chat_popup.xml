@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/encryt"
+        android:icon="@drawable/chat_edittext"
+        android:title="암호화"/>
+    <item
+        android:id="@+id/decryt"
+        android:icon="@drawable/chat_edittext"
+        android:title="복호화"/>
+    <item
+        android:id="@+id/copy"
+        android:icon="@drawable/chat_edittext"
+        android:title="복사"/>
+    <item
+        android:id="@+id/delete"
+        android:icon="@drawable/chat_edittext"
+        android:title="삭제"/>
+</menu>
