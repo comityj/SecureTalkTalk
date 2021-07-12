@@ -15,6 +15,7 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -105,9 +106,6 @@ public class ChatActivity extends AppCompatActivity {
                 chatlist.clear();
                 for(DataSnapshot dataSnapshots : dataSnapshot.getChildren()){
                     ChatDTO chatDTO = dataSnapshot.getValue(ChatDTO.class);
-                    String chatKey = dataSnapshot.getKey();
-
-                    chatlist.add(chatKey);
                 }
 
             }
@@ -118,26 +116,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        //registerForContextMenu(listmsg);
-
-        //aestxt = editmsg.getText().toString();
-
-
-
-/*        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-        keyGenerator.init(256);
-        SecretKey key = keyGenerator.generateKey();
-
-        byte[] IV = new byte[16];
-        SecureRandom random = new SecureRandom();
-        random.nextBytes(IV);
-
-        byte[] cipherText = encrypt(editmsg.getText().toString().getBytes(),key, IV);
-        //System.out.println("Encrypted Text : "+Base64.getEncoder().encodeToString(cipherText));
-
-        //String decryptedText = decrypt(cipherText,key, IV);*/
-
-        openChat(chatname);
+        //openChat(chatname);
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,6 +125,7 @@ public class ChatActivity extends AppCompatActivity {
                 ChatDTO chatDTO = new ChatDTO(username, editmsg.getText().toString(), encryptox);
                 databaseReference.child("message").child(chatname).push().setValue(chatDTO);
                 editmsg.setText("");
+                //Toast.makeText(ChatActivity.this,databaseReference.child("message").child(chatname).child(chatlist.get(position)).toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -183,30 +163,55 @@ public class ChatActivity extends AppCompatActivity {
                 //Toast.makeText(ChatActivity.this,"삭제 되었습니다.", Toast.LENGTH_SHORT).show();
                 Toast.makeText(ChatActivity.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
                 //Toast.makeText(ChatActivity.this,databaseReference.child("message").child(chatname).child(chatlist.get(position)).toString(), Toast.LENGTH_SHORT).show();
+                //final String chatkey = chatlist.get(position);
+                //final FirebaseDatabase chatmsg = databaseReference.child("message").child("chatName").child(chatkey).child("msg").getValue();
+                //databaseReference.child("message").child(chatname).child(chatkey).child("msg")
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.encryt:
                                 //Toast.makeText(ChatActivity.this,"암호화 되었습니다.", Toast.LENGTH_SHORT).show();
-                                Toast.makeText(ChatActivity.this,databaseReference.child("message").child(chatname).child(chatlist.get(position)).toString(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(ChatActivity.this,databaseReference.child("message").child(chatname).child(chatlist.get(position)).toString(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(ChatActivity.this, chatkey, Toast.LENGTH_SHORT).show();
                                 break;
 
                             case R.id.decryt:
                                 Toast.makeText(ChatActivity.this,"복호화 되었습니다.", Toast.LENGTH_SHORT).show();
                                 //Toast.makeText(ChatActivity.this,position, Toast.LENGTH_SHORT).show();
                                 //chatlist.remove(position);
-                                databaseReference.child("message").child("chatName").removeValue();
                                 break;
 
                             case R.id.copy:
+                                Toast.makeText(ChatActivity.this, databaseReference.child("message").child("chatName").child(chatlist.get(position)).toString(), Toast.LENGTH_SHORT).show();
                                 //Toast.makeText(ChatActivity.this,"복사 되었습니다.", Toast.LENGTH_SHORT).show();
-                                Toast.makeText(ChatActivity.this,databaseReference.child("message").child(chatname).child(chatlist.get(position)).toString(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(, Toast.LENGTH_SHORT).show();
                                 break;
 
                             case R.id.delete:
+                                //new openChat().new onChildRemoved();
+
+                                //final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1);
+/*                                databaseReference.child("message").child("chatName").child(chatlist.get(position)).addChildEventListener(new ChildEventListener() {
+                                    @Override
+                                    public void onChildAdded(DataSnapshot snapshot, String s) {      }
+
+                                    @Override
+                                    public void onChildChanged(DataSnapshot snapshot, String s) {        }
+
+                                    @Override
+                                    public void onChildRemoved(DataSnapshot snapshot) {        }
+
+                                    @Override
+                                    public void onChildMoved(DataSnapshot snapshot, String s) {      }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError error) {         }
+                                });*/
+                                //deletechat(position);
+                                //databaseReference.child("message").child("chatName").child(chatlist.get(position)).removeValue();
                                 //Toast.makeText(ChatActivity.this,"삭제 되었습니다.", Toast.LENGTH_SHORT).show();
-                                databaseReference.child("message").child("chatName").child(chatlist.get(position)).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+/*                                databaseReference.child("message").child("chatName").child(chatkey).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
                                         Toast.makeText(ChatActivity.this,"삭제 성공", Toast.LENGTH_SHORT).show();
@@ -216,7 +221,7 @@ public class ChatActivity extends AppCompatActivity {
                                     public void onFailure(@NonNull Exception e) {
                                         Toast.makeText(ChatActivity.this,"삭제 실패.", Toast.LENGTH_SHORT).show();
                                     }
-                                });
+                                });*/
                                 //chatlist.remove(position);
                                 //deletechat(position);
 
@@ -232,48 +237,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-/*       listmsg.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position) { //public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id)
-                PopupMenu popup = new PopupMenu(ChatActivity.this, view);
-                getMenuInflater().inflate(R.menu.chat_popup, popup.getMenu());
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-
-                        Toast.makeText(ChatActivity.this, "삭제되었습니다.", Toast.LENGTH_SHORT).show();
-                        databaseReference.child("message").child(chatname).child(chatlist.get(position)).removeValue();
-                        return true;
-
-*//*                        switch (item.getItemId()) {
-                            case R.id.encryt:
-                                Toast.makeText(ChatActivity.this,"암호화 되었습니다.", Toast.LENGTH_SHORT).show();
-                                return true;;
-
-                            case R.id.decryt:
-                                Toast.makeText(ChatActivity.this,"복호화 되었습니다.", Toast.LENGTH_SHORT).show();
-                                return true;;
-
-                            case R.id.copy:
-                                Toast.makeText(ChatActivity.this,"복사 되었습니다.", Toast.LENGTH_SHORT).show();
-                                return true;;
-
-                            case R.id.delete:
-                                Toast.makeText(ChatActivity.this,"삭제 되었습니다.", Toast.LENGTH_SHORT).show();
-                                return true;
-
-                        }
-                        return false;*//*
-                    }
-                });
-                popup.show();
-                return false;
-            }
-        });*/
-
+        openChat(chatname);
     }
     private void deletechat(int postion){
         firebaseDatabase.getReference().child("messgae").child(chatname).child(chatlist.get(postion)).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -288,88 +252,6 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
-
-
-/*
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
-        super.onCreateContextMenu(menu, v, menuInfo);
-        //List<String> chatlist = new ArrayList<>();
-        menu.setHeaderTitle("Menu");
-        menu.add(0, 1, 0, "암호화");
-        menu.add(0, 2, 0, "복호화");
-        menu.add(0, 3, 0, "복사");
-        MenuItem remove = menu.add(0, 4, 0, "삭제");
-
-        remove.setOnMenuItemClickListener(onMICL);
-    }
-
-    private final MenuItem.OnMenuItemClickListener onMICL = new MenuItem.OnMenuItemClickListener() {
-        @Override
-        public boolean onMenuItemClick(MenuItem item) {
-            switch (item.getItemId()){
-                case 1 :    //암호화
-                    //if ()
-                    Toast.makeText(ChatActivity.this,"암호화 되었습니다.", Toast.LENGTH_SHORT).show();
-                    return true;
-                case 2 :    //복호화
-                    Toast.makeText(ChatActivity.this,"복호화 되었습니다.", Toast.LENGTH_SHORT).show();
-
-                    return true;
-                case 3 :    //복사
-                    Toast.makeText(ChatActivity.this,"복사 되었습니다.", Toast.LENGTH_SHORT).show();
-
-                    return true;
-                case 4 :    //삭제
-                    //array.remove(position);
-                    //firebaseDatabase.getReference().child("message").child()
-                    //deleteMessage(position);
-                    //databaseReference.child("message").child(chatname).child(chatlist.get(position)).removeValue();
-                    //list.remove(position);
-                    //databaseReference.child("message").child(chatname).child(uidList.get(listmsg.getSelectedItemPosition()).);
-
-                    //Toast.makeText(ChatActivity.this,"삭제 되었습니다.", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(ChatActivity.this, "", Toast.LENGTH_SHORT).show();
-                    listmsg.remove
-
-            }
-            return true;
-        }
-    };*/
-
-
-
-/*    @Override
-    //public boolean onContextItemSelected(MenuItem item, AdapterView<?> parent, View v, int i, long id){
-    public boolean onContextItemSelected(MenuItem item){
-        //final int position = i;
-        switch (item.getItemId()){
-            case 1 :    //암호화
-                //if ()
-                Toast.makeText(ChatActivity.this,"암호화 되었습니다.", Toast.LENGTH_SHORT).show();
-                return true;
-            case 2 :    //복호화
-                Toast.makeText(ChatActivity.this,"복호화 되었습니다.", Toast.LENGTH_SHORT).show();
-
-                return true;
-            case 3 :    //복사
-                Toast.makeText(ChatActivity.this,"복사 되었습니다.", Toast.LENGTH_SHORT).show();
-
-                return true;
-            case 4 :    //삭제
-                //array.remove(position);
-                //firebaseDatabase.getReference().child("message").child()
-                //deleteMessage(position);
-                //databaseReference.child("message").child(chatname).child(chatlist.get(position)).removeValue();
-                Toast.makeText(ChatActivity.this,"삭제 되었습니다.", Toast.LENGTH_SHORT).show();
-
-                return true;
-
-            default :
-                return super.onContextItemSelected(item);
-
-        }
-    }*/
 
 
     public static String Encrypt(String text, String key) throws Exception
@@ -408,26 +290,6 @@ public class ChatActivity extends AppCompatActivity {
         return new String(results,"UTF-8");
     }
 
-/*    public static byte[] encrypt (byte[] plaintext,SecretKey key,byte[] IV ) throws Exception
-    {
-        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        SecretKeySpec keySpec = new SecretKeySpec(key.getEncoded(), "AES");
-        IvParameterSpec ivSpec = new IvParameterSpec(IV);
-        cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec);
-        byte[] cipherText = cipher.doFinal(editmsg.getText().toString());
-        return cipherText;
-    }
-
-    public static String decrypt (byte[] cipherText, SecretKey key,byte[] IV) throws Exception
-    {
-        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        SecretKeySpec keySpec = new SecretKeySpec(key.getEncoded(), "AES");
-        IvParameterSpec ivSpec = new IvParameterSpec(IV);
-        cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);
-        byte[] decryptedText = cipher.doFinal(cipherText);
-        return new String(decryptedText);
-    }*/
-
     private void addMessage(DataSnapshot dataSnapshot, ArrayAdapter<String> adapter) {
         ChatDTO chatDTO = dataSnapshot.getValue(ChatDTO.class);
         adapter.add(chatDTO.getUsername() + " : " + chatDTO.getMsg());
@@ -442,12 +304,8 @@ public class ChatActivity extends AppCompatActivity {
         databaseReference.child("message").child(chatName).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-/*                //ChatActivity chatActivity = dataSnapshot.getValue(ChatActivity.class);
-                ChatDTO chatDTO = new ChatDTO(username, editmsg.getText().toString());
-                //adapter.add(chatDTO.getUsername() + ": " + chatDTO.getMsg());
-                mAuth = FirebaseAuth.getInstance();
-                FirebaseUser user = mAuth.getCurrentUser();
-                adapter.add(user.getDisplayName() + ": " + chatDTO.getMsg());*/
+                String chatKey = dataSnapshot.getKey();
+                chatlist.add(chatKey);
                 addMessage(dataSnapshot, adapter);
                 Log.e("LOG", "s:" + s);
             }
