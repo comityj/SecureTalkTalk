@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
             }
-        }, 3000);
+        }, 2000);
 
         //t1 = findViewById(R.id.test1);
 /*        t2 = findViewById(R.id.test2_ti);

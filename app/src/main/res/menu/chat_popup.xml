@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/encryt"
+        android:id="@+id/encryptmsg"
         android:icon="@drawable/chat_edittext"
         android:title="암호화"/>
     <item
-        android:id="@+id/decryt"
+        android:id="@+id/decryptmsg"
         android:icon="@drawable/chat_edittext"
         android:title="복호화"/>
     <item
